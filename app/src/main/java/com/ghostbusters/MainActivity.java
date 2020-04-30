@@ -1,8 +1,8 @@
-package com.ghostbusters.game;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.ghostbusters;
 
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import com.ghostbusters.game.R;
 
 public class MainActivity extends AppCompatActivity {
 
