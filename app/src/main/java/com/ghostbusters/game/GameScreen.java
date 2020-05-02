@@ -2,11 +2,13 @@ package com.ghostbusters.game;
 
 import com.ghostbusters.framework.Game;
 import com.ghostbusters.framework.Screen;
+import com.ghostbusters.game.Input.GameInput;
 import com.ghostbusters.game.Structures.GameState;
 
 public class GameScreen extends Screen {
     private final GameGraphics gameGraphics;
-    GameState state = GameState.Menu;
+    private final GameInput gameInput;
+    GameState state;
     World world;
 
     public GameScreen(Game game) {
@@ -16,12 +18,13 @@ public class GameScreen extends Screen {
         //TODO: Add config handling.
         //this.world.Initialize(config);
         this.state = com.ghostbusters.game.Structures.GameState.Game;
-        this.gameGraphics = new GameGraphics(game);
+        this.gameGraphics = new GameGraphics(game.getGraphics());
+        this.gameInput = new GameInput(game.getInput());
     }
 
     @Override
     public void update(float deltaTime) {
-        GameController gameControllerInput = InputWrapper.GetGameControllerInput(game.getInput());
+        GameController gameControllerInput = gameInput.GetGameControllerInput();
         world.ProcessInput(gameControllerInput);
         world.Update();
 
