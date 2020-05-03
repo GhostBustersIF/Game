@@ -1,18 +1,18 @@
 package com.ghostbusters.game;
 
-import com.ghostbusters.framework.Game;
+import com.ghostbusters.framework.Graphics;
 import com.ghostbusters.framework.Pixmap;
 
 public class GameGraphics {
-    private Game game;
+    private Graphics graphics;
 
-    public GameGraphics(Game game)
+    public GameGraphics(Graphics graphics)
     {
-        this.game = game;
+        this.graphics = graphics;
     }
 
     public void drawImage(Pixmap pixmap, int x, int y)
     {
-        game.getGraphics().drawPixmap(pixmap, x, y);
+        graphics.drawPixmap(pixmap, x, y);
     }
 }
