@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameMap implements GameObject {
-    private Position map = new Position(0, 0, 320, 480);
+    private Position map = new Position(0, 0, 320, 480);//320/480
     private List<Player> players = new ArrayList<Player>();
     private List<Tile> tiles = new ArrayList<Tile>();
     private List<Enemy> units = new ArrayList<Enemy>();

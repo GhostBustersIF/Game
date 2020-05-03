@@ -13,8 +13,10 @@ import java.util.List;
 public final class GameInput {
 
     private final AggregatedInput aggregatedInput;
+    private Input input;
 
     public GameInput(Input input) {
+        this.input = input;
         List<InputProvider> inputs = new ArrayList<>();
         inputs.add(new KeyboardInput(input));
         inputs.add(new TouchInput(input));
@@ -24,5 +26,9 @@ public final class GameInput {
     public GameController GetGameControllerInput() {
         GameController gameController = aggregatedInput.GetController();
         return gameController;
+    }
+
+    public List<Input.TouchEvent> GetTouchInput(){
+        return input.getTouchEvents();
     }
 }

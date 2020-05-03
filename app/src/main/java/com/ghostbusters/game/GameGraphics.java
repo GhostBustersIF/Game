@@ -15,4 +15,8 @@ public class GameGraphics {
     {
         graphics.drawPixmap(pixmap, x, y);
     }
+    public void drawRect(int x, int y, int width, int height, int color)
+    {
+        graphics.drawRect(x,y,width,height,color);
+    }
 }

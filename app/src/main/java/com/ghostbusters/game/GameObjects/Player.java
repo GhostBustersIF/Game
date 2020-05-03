@@ -16,11 +16,12 @@ import java.util.List;
 public class Player implements GameObject {
     public Position position = new Position(100, 100, 12, 12);
     public Direction direction = Direction.Right;
-    public int velocity = 6;
+    //Player speed
+    public int velocity = 1;
     public boolean isDead = false;
-
-    private final int PAC_ANIM_DELAY = 200;
-    private final int PACMAN_ANIM_COUNT = 4;
+    //
+    private final int PAC_ANIM_DELAY = 15;
+    private final int PACMAN_ANIM_COUNT = 5;
     private int pacAnimDir = 1;
 
     private int pacAnimCount = PAC_ANIM_DELAY;
@@ -113,15 +114,15 @@ public class Player implements GameObject {
                 ui.drawImage(image3, this.position.X + 1, this.position.Y + 1);
                 break;
             default:
-                ui.drawImage(Assets.pacman, this.position.X + 1, this.position.Y + 1);
+                ui.drawImage(image2, this.position.X + 1, this.position.Y + 1);
                 break;
         }
     }
 
     private void doAnim() {
-
-        pacAnimCount--;
-
+        if(!actions.isEmpty()) {
+            pacAnimCount--;
+        }
         if (pacAnimCount <= 0) {
             pacAnimCount = PAC_ANIM_DELAY;
             pacmanAnimPos = pacmanAnimPos + pacAnimDir;
