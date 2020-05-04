@@ -18,15 +18,14 @@ public class Player implements GameObject {
     public Direction direction = Direction.Right;
     //Player speed
     public int velocity = 1;
-    public boolean isDead = false;
-    //
-    private final int PAC_ANIM_DELAY = 15;
-    private final int PACMAN_ANIM_COUNT = 5;
-    private int pacAnimDir = 1;
+    public boolean isDead = true;
 
-    private int pacAnimCount = PAC_ANIM_DELAY;
+    private final int ANIM_DELAY = 20;
+    private final int ANIM_COUNT = 3;
 
-    private int pacmanAnimPos = 0;
+    private int AnimCount = ANIM_DELAY;//лічильник зміни анімації
+    private int AnimPos = 1;
+    private boolean changeAnimation = true;
     private List<GameAction> actions = new ArrayList<>();
 
     @Override
@@ -103,7 +102,7 @@ public class Player implements GameObject {
     }
 
     private void DrawAnim(GameGraphics ui, Pixmap image1, Pixmap image2, Pixmap image3) {
-        switch (pacmanAnimPos) {
+        switch (AnimPos) {
             case 1:
                 ui.drawImage(image1, this.position.X + 1, this.position.Y + 1);
                 break;
@@ -121,15 +120,20 @@ public class Player implements GameObject {
 
     private void doAnim() {
         if(!actions.isEmpty()) {
-            pacAnimCount--;
+            AnimCount--;
         }
-        if (pacAnimCount <= 0) {
-            pacAnimCount = PAC_ANIM_DELAY;
-            pacmanAnimPos = pacmanAnimPos + pacAnimDir;
-
-            if (pacmanAnimPos == (PACMAN_ANIM_COUNT - 1) || pacmanAnimPos == 0) {
-                pacAnimDir = -pacAnimDir;
-            }
+        if (AnimCount <= 0) {
+            AnimCount = ANIM_DELAY;
+            if(changeAnimation){
+                AnimPos++;
+                if(AnimPos >= ANIM_COUNT)
+                    changeAnimation = false;
+                }
+            else {
+                AnimPos--;
+                if(AnimPos <= 1)
+                    changeAnimation = true;
+                }
         }
     }
 }
