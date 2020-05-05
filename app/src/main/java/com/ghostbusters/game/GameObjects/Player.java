@@ -16,16 +16,16 @@ import java.util.List;
 public class Player implements GameObject {
     public Position position = new Position(100, 100, 12, 12);
     public Direction direction = Direction.Right;
-    public int velocity = 6;
-    public boolean isDead = false;
+    //Player speed
+    public int velocity = 1;
+    public boolean isDead = true;
 
-    private final int PAC_ANIM_DELAY = 200;
-    private final int PACMAN_ANIM_COUNT = 4;
-    private int pacAnimDir = 1;
+    private final int ANIM_DELAY = 20;
+    private final int ANIM_COUNT = 3;
 
-    private int pacAnimCount = PAC_ANIM_DELAY;
-
-    private int pacmanAnimPos = 0;
+    private int AnimCount = ANIM_DELAY;//лічильник зміни анімації
+    private int AnimPos = 1;
+    private boolean changeAnimation = true;
     private List<GameAction> actions = new ArrayList<>();
 
     @Override
@@ -102,7 +102,7 @@ public class Player implements GameObject {
     }
 
     private void DrawAnim(GameGraphics ui, Pixmap image1, Pixmap image2, Pixmap image3) {
-        switch (pacmanAnimPos) {
+        switch (AnimPos) {
             case 1:
                 ui.drawImage(image1, this.position.X + 1, this.position.Y + 1);
                 break;
@@ -113,22 +113,27 @@ public class Player implements GameObject {
                 ui.drawImage(image3, this.position.X + 1, this.position.Y + 1);
                 break;
             default:
-                ui.drawImage(Assets.pacman, this.position.X + 1, this.position.Y + 1);
+                ui.drawImage(image2, this.position.X + 1, this.position.Y + 1);
                 break;
         }
     }
 
     private void doAnim() {
-
-        pacAnimCount--;
-
-        if (pacAnimCount <= 0) {
-            pacAnimCount = PAC_ANIM_DELAY;
-            pacmanAnimPos = pacmanAnimPos + pacAnimDir;
-
-            if (pacmanAnimPos == (PACMAN_ANIM_COUNT - 1) || pacmanAnimPos == 0) {
-                pacAnimDir = -pacAnimDir;
-            }
+        if(!actions.isEmpty()) {
+            AnimCount--;
+        }
+        if (AnimCount <= 0) {
+            AnimCount = ANIM_DELAY;
+            if(changeAnimation){
+                AnimPos++;
+                if(AnimPos >= ANIM_COUNT)
+                    changeAnimation = false;
+                }
+            else {
+                AnimPos--;
+                if(AnimPos <= 1)
+                    changeAnimation = true;
+                }
         }
     }
 }
