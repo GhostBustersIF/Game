@@ -16,13 +16,14 @@ import java.util.List;
 public class Enemy implements GameObject {
     private final int ANIM_DELAY = 20;
     private final int ANIM_COUNT = 3;
+
     public Position position = new Position(200, 200, 12, 12);
     public Direction direction = Direction.randomDirection();
-    public int velocity = 3;
+    public int velocity = 80;
+    public boolean isDead;
 
     private int stepsInSameDirection = 0;
     private int maxStepsInSameDirection = 10;
-
     private int AnimCount = ANIM_DELAY;//лічильник зміни анімації
     private int AnimPos = 1;
     private boolean changeAnimation = true;
@@ -37,34 +38,37 @@ public class Enemy implements GameObject {
 
     @Override
     public void Update(World world) {
-        world.processActions(this.actions);
 
-        if (stepsInSameDirection++ >= maxStepsInSameDirection) {
-            this.direction = Direction.randomDirection();
-            stepsInSameDirection = 0;
-        }
+            world.processActions(this.actions);
+
+            if (stepsInSameDirection++ >= maxStepsInSameDirection) {
+                this.direction = Direction.randomDirection();
+                stepsInSameDirection = 0;
+            }
+
     }
 
     @Override
     public void Repaint(GameGraphics ui) {
-        doAnim();
-        switch (direction) {
-            case Left:
-                drawLeft(ui);
-                break;
-            case Up:
-                drawUp(ui);
-                break;
-            case Right:
-                drawRight(ui);
-                break;
-            case Down:
-                drawDown(ui);
-                break;
-            default:
-                drawRight(ui);
-                break;
-        }
+            doAnim();
+            switch (direction) {
+                case Left:
+                    drawLeft(ui);
+                    break;
+                case Up:
+                    drawUp(ui);
+                    break;
+                case Right:
+                    drawRight(ui);
+                    break;
+                case Down:
+                    drawDown(ui);
+                    break;
+                default:
+                    drawRight(ui);
+                    break;
+            }
+
     }
 
     private void drawUp(GameGraphics ui) {

@@ -26,8 +26,7 @@ public class GameScreen extends Screen {
     public void update(float deltaTime) {
         GameController gameControllerInput = gameInput.GetGameControllerInput();
         world.ProcessInput(gameControllerInput);
-        world.Update();
-
+        world.Update(deltaTime);
         if (world.isGameOver) {
             state = com.ghostbusters.game.Structures.GameState.Exit;
         }
