@@ -1,14 +1,17 @@
 package com.ghostbusters.game.GameObjects;
 
+import com.ghostbusters.game.Configs.EnemyConfig;
+import com.ghostbusters.game.Configs.PlayerConfig;
 import com.ghostbusters.game.GameController;
 import com.ghostbusters.game.GameGraphics;
+import com.ghostbusters.game.Loaders.LoadAnimationAsset;
+import com.ghostbusters.game.Structures.Direction;
 import com.ghostbusters.game.Structures.Position;
 import com.ghostbusters.game.World;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GameMap implements GameObject {
     private Position map = new Position(0, 0, 320, 480);//320/480
@@ -16,16 +19,22 @@ public class GameMap implements GameObject {
     private List<Tile> tiles = new ArrayList<Tile>();
     private List<Enemy> units = new ArrayList<Enemy>();
 
-    public GameMap() {
+    public GameMap(LoadAnimationAsset loader) {
         tiles.add(new Tile());
+        PlayerConfig playerConfig = new PlayerConfig();
+        playerConfig.position = new Position(200,200,25,25);
+        playerConfig.animation = loader.load("cats/tiger/");
+        playerConfig.velocity = 35;
+        playerConfig.startDirection = Direction.Up;
+        players.add(new Player(playerConfig));
 
-        players.add(new Player());
-
-//        units.add(new Enemy());
-//        units.add(new Enemy());
-//        units.add(new Enemy());
-        for (int i = 0; i<3;i++){
-            units.add(new Enemy());
+        EnemyConfig enemySlow = new EnemyConfig();
+        enemySlow.position = new Position(25,25,25,25);
+        enemySlow.animation = loader.load("mouse/yellow/");
+        enemySlow.velocity = 100;
+        enemySlow.startDirection = Direction.randomDirection();
+        for (int i = 0; i<5;i++){
+            units.add(new Enemy(enemySlow));
         }
 
 

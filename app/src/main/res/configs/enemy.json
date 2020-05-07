@@ -1,3 +1,11 @@
 {
-  
+  "Mouse": [
+    {
+      "velocity" : 50,
+      "color" : "white",
+      "stepsInSameDirection" : 5,
+      "maxStepsInSameDirection" : 10
+    }
+  ]
+
 }

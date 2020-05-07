@@ -1,15 +1,19 @@
 package com.ghostbusters.game;
 
+import com.ghostbusters.framework.Game;
+import com.ghostbusters.game.AnimationAsset.ThreeFrameAsset;
 import com.ghostbusters.game.Configs.GameConfig;
 import com.ghostbusters.game.Actions.GameAction;
 import com.ghostbusters.game.GameObjects.GameMap;
+import com.ghostbusters.game.Loaders.LoadAnimationAsset;
 
 import java.util.List;
 
 public class World {
 
     public boolean isGameOver = false;
-    private GameMap map = new GameMap();
+    private GameMap map;
+
 
     public float getDeltaTime() {
         return deltaTime;
@@ -17,7 +21,9 @@ public class World {
 
     private float deltaTime;
 
-    public World() {}
+    public World(LoadAnimationAsset loader) {
+        this.map = new GameMap(loader);
+    }
 
     public void ProcessInput(GameController gameController) {
         map.ProcessInput(gameController);
