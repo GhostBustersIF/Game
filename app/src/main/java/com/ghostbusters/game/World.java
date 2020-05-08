@@ -11,13 +11,20 @@ public class World {
     public boolean isGameOver = false;
     private GameMap map = new GameMap();
 
+    public float getDeltaTime() {
+        return deltaTime;
+    }
+
+    private float deltaTime;
+
     public World() {}
 
     public void ProcessInput(GameController gameController) {
         map.ProcessInput(gameController);
     }
 
-    public void Update() {
+    public void Update(float deltaTime) {
+        this.deltaTime = deltaTime;
         map.Update(this);
     }
 

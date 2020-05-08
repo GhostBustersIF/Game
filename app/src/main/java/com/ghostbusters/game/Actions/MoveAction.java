@@ -23,13 +23,14 @@ public class MoveAction implements GameAction {
     public void Execute(World world) {
         this.enemy.direction = direction;
         Position position = this.enemy.position;
-        int newX = position.X;
-        int newY = position.Y;
+        float newX = position.preciseX;
+        float newY = position.preciseY;
 
-        if (direction == Direction.Left) newX -= this.enemy.velocity;
-        if (direction == Direction.Right) newX += this.enemy.velocity;
-        if (direction == Direction.Up) newY -= this.enemy.velocity;
-        if (direction == Direction.Down) newY += this.enemy.velocity;
+        float distance = CalculateDistance(this.enemy.velocity,world);
+        if (direction == Direction.Left) newX -= distance;
+        if (direction == Direction.Right) newX += distance;
+        if (direction == Direction.Up) newY -= distance;
+        if (direction == Direction.Down) newY += distance;
 
         Position newPosition = position.MoveTo(newX, newY);
 
@@ -54,5 +55,9 @@ public class MoveAction implements GameAction {
         }
 
         this.enemy.position = newPosition;
+    }
+
+    private float CalculateDistance (int velocity, World world){
+        return world.getDeltaTime() * velocity;
     }
 }

@@ -5,6 +5,8 @@ public class Position {
     public final int Y; // top left corner
     public final int Width;
     public final int Height;
+    public final float preciseX;
+    public final float preciseY;
 
     public Position(int x, int y, int width, int height)
     {
@@ -12,11 +14,22 @@ public class Position {
         this.Y = y;
         this.Width = width;
         this.Height = height;
+        this.preciseX = x;
+        this.preciseY = y;
     }
 
-    public Position MoveTo(int x, int y)
+    private Position(float preciseX, float preciseY, int width, int height){
+        this.preciseX = preciseX;
+        this.preciseY = preciseY;
+        this.Width = width;
+        this.Height = height;
+        this.X = (int) preciseX;
+        this.Y = (int) preciseY;
+    }
+
+    public Position MoveTo(float preciseX, float preciseY)
     {
-        return new Position(x, y, this.Width, this.Height);
+        return new Position(preciseX, preciseY, this.Width, this.Height);
     }
 
     public boolean IsOverlap(Position other)

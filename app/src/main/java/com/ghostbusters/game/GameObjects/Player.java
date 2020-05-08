@@ -14,14 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements GameObject {
-    public Position position = new Position(100, 100, 12, 12);
-    public Direction direction = Direction.Right;
-    //Player speed
-    public int velocity = 1;
-    public boolean isDead = true;
-
     private final int ANIM_DELAY = 20;
     private final int ANIM_COUNT = 3;
+
+    public Position position = new Position(100, 100, 12, 12);
+    public Direction direction = Direction.Right;
+    public int velocity = 30;
+    public boolean isDead = true;
 
     private int AnimCount = ANIM_DELAY;//лічильник зміни анімації
     private int AnimPos = 1;
