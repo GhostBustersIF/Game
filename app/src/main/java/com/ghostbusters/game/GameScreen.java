@@ -2,6 +2,7 @@ package com.ghostbusters.game;
 
 import com.ghostbusters.framework.Game;
 import com.ghostbusters.framework.Screen;
+import com.ghostbusters.game.AnimationAsset.ThreeFrameAsset;
 import com.ghostbusters.game.Input.GameInput;
 import com.ghostbusters.game.Structures.GameState;
 
@@ -14,7 +15,7 @@ public class GameScreen extends Screen {
     public GameScreen(Game game) {
         super(game);
 
-        this.world = new World();
+        this.world = new World(new ThreeFrameAsset(game.getGraphics()));
         //TODO: Add config handling.
         //this.world.Initialize(config);
         this.state = com.ghostbusters.game.Structures.GameState.Game;

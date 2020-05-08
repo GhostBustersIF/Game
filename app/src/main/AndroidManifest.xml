@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ghostbusters.game"
     android:versionCode="1"
     android:versionName="1.0"
+
     android:installLocation="preferExternal">
     <application android:icon="@mipmap/ic_launcher"
         android:label="GhostBusters">
+
         <activity android:name="com.ghostbusters.game.GameMain"
-            android:configChanges="keyboard|keyboardHidden|orientation">
+            android:screenOrientation="portrait"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            tools:ignore="LockedOrientationActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
